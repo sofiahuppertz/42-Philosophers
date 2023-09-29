@@ -122,7 +122,7 @@ int init_threads(pthread_t **thread, philo_t **philo, data_t *t, fork_t *forks) 
     gettimeofday(&t->start_of_simulation, NULL);
     printf("start of simulation: %ld\n", t->start_of_simulation.tv_sec); 
     while (i < total) {
-        if (pthread_create(thread[i], NULL, &philo_lifestyle, philo[i]))
+        if (pthread_create(&(*thread)[i], NULL, &philo_lifestyle, philo[i]))
         {
             free_memory(philo, forks, t);
             perror("pthread_create error");
