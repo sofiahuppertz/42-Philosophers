@@ -41,7 +41,9 @@ int init_data(data_t **t, char *argv[]) {
     if (argv[5])
         (*t)->number_of_meals = str_to_int(argv[5]);
     else
-        (*t)->number_of_meals = -1; 
+        (*t)->number_of_meals = -1;
+    memset(&(*t)->start_of_simulation, 0, sizeof(struct timeval));
+    (*t)->someone_died = 0; 
     return (1);
 }
 
@@ -94,7 +96,8 @@ int init_philosophers(philo_t ***philo, fork_t *forks, data_t *t) {
             return (0);
         }
         (*philo)[i]->id = i;
-        (*philo)[i]->last_meal = 0;
+        (*philo)[i]->eaten_meals = 0;
+        memset(&(*philo)[i]->last_meal, 0, sizeof(struct timeval));
         (*philo)[i]->t = t;
         (*philo)[i]->left = &forks[i];
         (*philo)[i]->right = &forks[(i + 1) % t->philo_total];
@@ -116,6 +119,8 @@ int init_threads(pthread_t **thread, philo_t **philo, data_t *t, fork_t *forks) 
         perror("pthread_t malloc error");
         return (0);
     }
+    gettimeofday(&t->start_of_simulation, NULL);
+    printf("start of simulation: %ld\n", t->start_of_simulation.tv_sec); 
     while (i < total) {
         if (pthread_create(thread[i], NULL, &philo_lifestyle, philo[i]))
         {

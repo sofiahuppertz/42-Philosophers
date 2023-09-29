@@ -15,7 +15,6 @@ int main(int argc, char *argv[]) {
     if (!check_args(argc, argv))
         return (1);   
     if (!init_data(&t, argv))
-        return (1);
     if (!init_forks(&forks, t))
         return (1);
     if (!init_philosophers(&philo, forks, t))

@@ -1,10 +1,11 @@
 #ifndef PHILOSOPHERS_H
 #define PHILOSOPHERS_H
 
+#include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <pthread.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 
@@ -19,11 +20,14 @@ typedef struct data_s {
     int time_to_eat;
     int time_to_sleep;
     int number_of_meals;
+    int someone_died;
+    struct timeval start_of_simulation;
 } data_t;
 
 typedef struct philo_s {
     int id;
-    int last_meal;
+    int eaten_meals;
+    struct timeval last_meal;
     data_t *t;
     fork_t *left;
     fork_t *right;
