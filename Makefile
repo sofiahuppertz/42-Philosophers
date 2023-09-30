@@ -6,6 +6,7 @@ SRCS_NAMES = main.c \
 			main_helpers.c \
 			socrates.c \
 			utils.c \
+			nietzsche.c \
 
 SRCS = $(addprefix srcs/, $(SRCS_NAMES))
 OBJS = $(SRCS:c=o)

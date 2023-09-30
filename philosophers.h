@@ -21,7 +21,10 @@ typedef struct data_s {
     int time_to_sleep;
     int number_of_meals;
     int someone_died;
+    int terminated;
     struct timeval start_of_simulation;
+    pthread_mutex_t print_mutex;
+    pthread_mutex_t end_mutex;
 } data_t;
 
 typedef struct philo_s {
@@ -45,6 +48,7 @@ int valid_number(char *str);
 void	*my_calloc(size_t elements, size_t size);
 void *philo_lifestyle (void *arg);
 
-void free_memory(philo_t **philo, fork_t *forks, data_t *t);
+void free_memory(philo_t **philo, fork_t *forks, data_t *t, char *str, int error);
+void end_simulation(philo_t **philo, data_t *t, fork_t *forks, pthread_t *thread);
 
 #endif
