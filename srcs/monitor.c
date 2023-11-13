@@ -53,49 +53,53 @@ void *monitor(void *arg)
 
 */
 
-/*
+
 void	*monitor(void *arg)
 {
 	t_philo	*philos;
 	t_shared_data	*shared_data;
-	int philo_died;
+	int philosopher_died;
 	int index;
-
-	philo_died = 0;
-	index = 0;
+	
 	philos = (t_philo *)arg;
 	shared_data = philos->shared_data;
+	philosopher_died = 0;
 	while (1)
 	{
-		while (index++ < shared_data->num_philos)
-        {
-            if (philo_dead(philos, shared_data->time_to_die, index))
-			{
-				philo_died = 1;
-				break;
-			}
-        }
-		if (philo_died || meals__ok(philos, shared_data))
-			break ;
+		index = 0;
+	    while (index < shared_data->num_philos)
+	    {
+	        if (philo_dead(philos, shared_data->time_to_die, index))
+	        {
+	            philosopher_died = 1;
+	            break;
+	        }
+			index++;
+	    }
+
+	    if (philosopher_died || meals__ok(philos, shared_data))
+	        break;
 	}
+
 	return (arg);
 }
 
-int	philo_dead(t_philo *philo, int time_to_die, int index)
+int philo_dead(t_philo *philo, int time_to_die, int index)
 {
-	pthread_mutex_lock(philo[index].meal_lock);
-	if (get_current_time() - philo[index].last_meal >= time_to_die && !philo[index].eating)
-	{
-		pthread_mutex_unlock(philo[index].meal_lock);
-		print_message("died", &philo[index], philo[index].id);
-		pthread_mutex_lock(philo[0].dead_lock);
-		*philo->dead = 1;
-		pthread_mutex_unlock(philo[0].dead_lock);
-		return (1);
-	}
-	pthread_mutex_unlock(philo[index].meal_lock);
-	return (0);
+    pthread_mutex_lock(philo[index].meal_lock);
+    if (get_current_time() - philo[index].last_meal >= time_to_die && !philo[index].eating)
+    {
+        pthread_mutex_unlock(philo[index].meal_lock);
+        print_message("died", &philo[index], philo[index].id);
+        pthread_mutex_lock(philo[0].dead_lock);
+        *philo->dead = 1;
+        pthread_mutex_unlock(philo[0].dead_lock);
+        return (1);
+    }
+    pthread_mutex_unlock(philo[index].meal_lock);
+    return (0);
 }
+
 
 int	meals__ok(t_philo *philos, t_shared_data *shared_data)
 {
@@ -124,11 +128,11 @@ int	meals__ok(t_philo *philos, t_shared_data *shared_data)
 	return (0);
 }
 
-*/
+
 
 //FINISH ------
 
-
+/*
 
 void	*monitor(void *arg)
 {
@@ -204,3 +208,4 @@ int	meals__ok(t_philo *philos, t_shared_data *shared_data)
 	return (0);
 }
 
+*/

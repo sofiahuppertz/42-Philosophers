@@ -64,9 +64,8 @@ int	start_simulation(t_program *program, pthread_mutex_t *forks);
 int	valid_arguments(char **argv, t_shared_data *data);
 
 short int	game_over(t_philo *philo);
-int	philosopher_dead(t_philo *philo, int time_to_die);
 //short int is_dead(t_philo *philosopher, int time_to_die);
-int	philo_dead(t_philo *philos, int time_to_die, int total_philos);
+int	philo_dead(t_philo *philos, int time_to_die, int index);
 short int is_digit(char *str);
 int	meals__ok(t_philo *philos, t_shared_data *shared_data);
 //short int meals_done(t_philo *philosophers, t_shared_data *shared_data);
