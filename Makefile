@@ -1,12 +1,18 @@
 NAME	= philo
 
-CFLAGS = -Wall -Wextra -Werror  
+CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -I./headers
 
-SRCS_NAMES = main.c \
+SRCS_NAMES = actions.c \
+			atoi.c \
+			end.c \
+			init.c \
+			lifecycle.c \
+			logs.c \
 			main_helpers.c \
-			socrates.c \
-			utils.c \
-			nietzsche.c \
+			main.c \
+			monitor.c \
+			start_simulation.c \
 
 SRCS = $(addprefix srcs/, $(SRCS_NAMES))
 OBJS = $(SRCS:c=o)
@@ -14,10 +20,10 @@ OBJS = $(SRCS:c=o)
 all		: $(NAME)
 
 $(NAME): $(OBJS)
-	cc -g3 $(OBJS) -o $(NAME)
+	cc $(OBJS) -lpthread -o $(NAME)
 
 %.o: srcs/%.c
-	cc -g3 $(CFLAGS) -I -c $< -o $@
+	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 fclean	: clean
 	rm -f $(NAME) 
