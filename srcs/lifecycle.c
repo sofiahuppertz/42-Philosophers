@@ -19,9 +19,9 @@ void	*life_cycle(void *arg)
 
 short int	game_over(t_philo *philo)
 {
-	pthread_mutex_lock(philo->dead_lock);
-	if (*philo->dead == 1)
-		return (pthread_mutex_unlock(philo->dead_lock), 1);
-	pthread_mutex_unlock(philo->dead_lock);
+	pthread_mutex_lock(philo->stop_flag_mutex);
+	if (*philo->stop == 1)
+		return (pthread_mutex_unlock(philo->stop_flag_mutex), 1);
+	pthread_mutex_unlock(philo->stop_flag_mutex);
 	return (0);
 }

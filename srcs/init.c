@@ -4,12 +4,12 @@
 
 int init_program(t_program *program, t_philo *philos)
 {
-    program->dead_flag = 0;
+    program->stop_program = 0;
     program->philos = philos;
 
     if (pthread_mutex_init(&program->write_lock, NULL) != 0 ||
-        pthread_mutex_init(&program->dead_lock, NULL) != 0 ||
-        pthread_mutex_init(&program->meal_lock, NULL) != 0) {
+        pthread_mutex_init(&program->stop_flag_mutex, NULL) != 0 ||
+        pthread_mutex_init(&program->eat_mutex, NULL) != 0) {
         write(2, "Error: Failed to initialize mutex\n", 34);
         return 0;
     }
@@ -47,10 +47,10 @@ void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
         philos[i].shared_data = shared_data;
         philos[i].start_time = get_current_time();
 		philos[i].last_meal = get_current_time();
-		philos[i].print_lock = &program->write_lock;
-		philos[i].dead_lock = &program->dead_lock;
-		philos[i].meal_lock = &program->meal_lock;
-		philos[i].dead = &program->dead_flag;
+		philos[i].print_mutex = &program->write_lock;
+		philos[i].stop_flag_mutex = &program->stop_flag_mutex;
+		philos[i].eat_mutex = &program->eat_mutex;
+		philos[i].stop = &program->stop_program;
 		philos[i].left_fork = &forks[i];
         philos[i].right_fork = &forks[(i + shared_data->num_philos - 1) % shared_data->num_philos]; // this is the line that was changed (if-else before)
 		i++;

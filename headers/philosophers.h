@@ -26,20 +26,20 @@ typedef struct s_philo
 	int				meals_eaten;
 	int			start_time;
 	int			last_meal;
-	int				*dead;
+	int				*stop;
 	t_shared_data   *shared_data;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*print_lock;
-	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	*print_mutex;
+	pthread_mutex_t	*stop_flag_mutex;
+	pthread_mutex_t	*eat_mutex;
 }					t_philo;
 
 typedef struct s_program
 {
-	int				dead_flag;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
+	int				stop_program;
+	pthread_mutex_t	stop_flag_mutex;
+	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
 }					t_program;
@@ -64,10 +64,8 @@ int	start_simulation(t_program *program, pthread_mutex_t *forks);
 int	valid_arguments(char **argv, t_shared_data *data);
 
 short int	game_over(t_philo *philo);
-//short int is_dead(t_philo *philosopher, int time_to_die);
-int	philo_dead(t_philo *philos, int time_to_die, int index);
+short int	philo_dead(t_philo *philos, int time_to_die, int index);
 short int is_digit(char *str);
-int	meals__ok(t_philo *philos, t_shared_data *shared_data);
-//short int meals_done(t_philo *philosophers, t_shared_data *shared_data);
+short int	meals_finished(t_philo *philos, t_shared_data *shared_data);
 
 #endif
