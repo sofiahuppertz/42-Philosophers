@@ -7,7 +7,7 @@ void	eat(t_philo *philo)
 	print_message("has taken a fork", philo, philo->id);
 	if (philo->shared_data->num_philos == 1)
 	{
-		usleep(philo->shared_data->time_to_die);
+		ft_usleep(philo->shared_data->time_to_die);
 		pthread_mutex_unlock(philo->right_fork);
 		return ;
 	}
@@ -19,7 +19,7 @@ void	eat(t_philo *philo)
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
-	usleep(philo->shared_data->time_to_eat);
+	ft_usleep(philo->shared_data->time_to_eat);
 	philo->eating = 0;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
@@ -33,5 +33,5 @@ void	think(t_philo *philo)
 void	dream(t_philo *philo)
 {
 	print_message("is sleeping", philo, philo->id);
-	usleep(philo->shared_data->time_to_sleep);
+	ft_usleep(philo->shared_data->time_to_sleep);
 }

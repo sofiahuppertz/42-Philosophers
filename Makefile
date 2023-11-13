@@ -6,6 +6,7 @@ INCLUDES = -I./headers
 SRCS_NAMES = actions.c \
 			atoi.c \
 			end.c \
+			ft_usleep.c \
 			init.c \
 			lifecycle.c \
 			logs.c \
@@ -23,7 +24,7 @@ $(NAME): $(OBJS)
 	cc $(OBJS) -lpthread -o $(NAME)
 
 %.o: srcs/%.c
-	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
+	cc -g $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 fclean	: clean
 	rm -f $(NAME) 

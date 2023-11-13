@@ -4,13 +4,14 @@ void	*life_cycle(void *arg)
 {
 	t_philo	*philo;
 
+	short int res;
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(1);
-	while (!game_over(philo))
+		ft_usleep(1);
+	while (!(res = game_over(philo)))
 	{
 		eat(philo);
-		dream(philo);
+		dream(philo);;
 		think(philo);
 	}
 	return (arg);

@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
         return (1);
     }
 	init_forks(forks, shared_data.num_philos);
-	init_philos(philos, &program, forks, &shared_data);
+	init_philos(philos, &program, forks, &shared_data);  
 	start_simulation(&program, forks);
 	destroy_all(NULL, &program, philos, forks, shared_data.num_philos);
 	return (0);
