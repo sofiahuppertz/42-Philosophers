@@ -26,8 +26,8 @@ typedef struct s_philo
 	int				meals_eaten;
 	int			start_time;
 	int			last_meal;
-    t_shared_data   *shared_data;
 	int				*dead;
+	t_shared_data   *shared_data;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*print_lock;
@@ -47,24 +47,24 @@ typedef struct s_program
 void	destroy_all(char *str, t_program *program, t_philo *philos, pthread_mutex_t *forks, int total);
 void	dream(t_philo *philo);
 void	eat(t_philo *philo);
+void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
+		t_shared_data *shared_data);
 void	*life_cycle(void *arg);
 void	*monitor(void *arg);
 void	print_message(char *str, t_philo *philo, int id);
 void	think(t_philo *philo);
 
-int	check_dead(t_philo *philo);
 int	ft_atoi(char *str);
 int	get_current_time(void);
 int init_forks(pthread_mutex_t *forks, int philo_num);
-void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
-		t_shared_data *shared_data);
 int init_program(t_program *program, t_philo *philos);
-int	is_digit(char *str);
 int	main(int argc, char **argv);
-int	check_if_all_ate(t_philo *philos, t_shared_data *shared_data);
-int	check_if_dead(t_philo *philos, t_shared_data *shared_data);
-int	philosopher_dead(t_philo *philo, int time_to_die);
 int	start_simulation(t_program *program, pthread_mutex_t *forks);
 int	valid_arguments(char **argv, t_shared_data *data);
+
+short int	game_over(t_philo *philo);
+short int is_dead(t_philo *philosopher, int time_to_die);
+short int is_digit(char *str);
+short int meals_done(t_philo *philosophers, t_shared_data *shared_data);
 
 #endif

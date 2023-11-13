@@ -25,7 +25,7 @@ int	valid_arguments(char **argv, t_shared_data *data)
     return (1);
 }
 
-int	is_digit(char *str)
+short int	is_digit(char *str)
 {
 	int	i;
 

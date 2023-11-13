@@ -7,7 +7,7 @@ void	*life_cycle(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		usleep(1);
-	while (!check_dead(philo))
+	while (!game_over(philo))
 	{
 		eat(philo);
 		dream(philo);
@@ -16,7 +16,7 @@ void	*life_cycle(void *arg)
 	return (arg);
 }
 
-int	check_dead(t_philo *philo)
+short int	game_over(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
 	if (*philo->dead == 1)

@@ -6,7 +6,7 @@ void	print_message(char *str, t_philo *philo, int id)
 
 	pthread_mutex_lock(philo->print_lock);
 	time = get_current_time() - philo->start_time;
-	if (!check_dead(philo))
+	if (!game_over(philo))
 		printf("%zu %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->print_lock);
 }
